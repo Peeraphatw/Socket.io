@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.socket.io/socket.io-3.0.1.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+      integrity="sha512-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ=="
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <h1 id="root"></h1>
+    <button onclick="setRed()" class="ui button">Bordcast Red button</button>
+    <button id="btn" class="ui button">Result Btn</button>
+
+    <script>
+      const socket = io("http://172.23.192.1:3001/");
+      socket.on("connection");
+      socket.on("goRed", (data) => {
+        document.getElementById("root").innerHTML = "red";
+        document.querySelector("#btn").style.backgroundColor = "red";
+        document.querySelector("#btn").classList.add("red");
+      });
+      const setRed = () => {
+        socket.emit("goRed", true);
+      };
+    </script>
+  </body>
+</html>
